@@ -73,6 +73,12 @@ branch_network:
     open_xmpp_client_port:
       $type: boolean
       $default: True
+    open_prometheus_port:
+      $type: boolean
+      $default: False
+    open_prometheus_alertmanager_port:
+      $type: boolean
+      $default: False
 
   forwarder:
     $type: select

@@ -1,3 +1,9 @@
+prometheus-alertmanager:
+  firewalld.service:
+    - name: prometheus-alertmanager
+    - ports:
+      - 9093/tcp
+
 {%- if salt['pillar.get']('branch_network:dedicated_NIC') %}
 add_nic_to_internal:
   firewalld.present:
@@ -67,6 +73,12 @@ common_services:
 {%- endif %}
 {%- if salt['pillar.get']('branch_network:firewall:open_xmpp_client_port') %}
         - xmpp-client
+{%- endif %}
+{%- if salt['pillar.get']('branch_network:firewall:open_prometheus_port') %}
+        - prometheus
+{%- endif %}
+{%- if salt['pillar.get']('branch_network:firewall:open_prometheus_alertmanager_port') %}
+        - prometheus-alertmanager
 {%- endif %}
 {%- if salt['pillar.get']('branch_network:firewall:enable_NAT') %}
     - masquerade: True
